@@ -1,0 +1,3 @@
+Hello, world!
+This is a test file.
+File input and output in C++ is fun!
