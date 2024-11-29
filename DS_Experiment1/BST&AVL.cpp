@@ -1,6 +1,8 @@
 #include<iostream>
 #include<fstream>
 #include<cmath>
+#include<sstream>
+#include<vector>
 using namespace std;
 #define max 1000
 class Node {
@@ -13,13 +15,9 @@ class Node {
         right = nullptr;
     };
 };
-
 int my_max(int a,int b) {
     return (a>b)?a:b;
 }
-
-
-
 class My_queue {
     public:
     int front;
@@ -122,22 +120,28 @@ public:
                     size++;
                     return;
                 }
-                if (d > array[index]) {
-                    index = 2 * index + 2; // 右子节点
+                if (d < array[index]) {
+                    index = 2 * index + 1; // 右子节点
                 }
                 else {
-                    index = 2 * index + 1; // 左子节点
+                    index = 2 * index + 2; // 左子节点
                 }
             }
         }
     }
-    void inorder(int *array, int index, int size) {
+    string inorder() {
+        stringstream ss;
+        inorderREC(array,0,size,ss);
+        return ss.str();
+    }
+
+    void inorderREC(int *array, int index, int size,stringstream &ss) {
         if(index >= Max_size || array[index] == -1) {
             return;
         }
-        inorder(array, 2*index+1,size);
-        cout<<array[index]<<" ";
-        inorder(array, 2*index+2,size);
+        inorderREC(array, 2*index+1,size,ss);
+        ss<<array[index]<<" ";
+        inorderREC(array, 2*index+2,size,ss);
     }
     int search(int d) {
         int index = 0;
@@ -163,73 +167,30 @@ public:
         while (index < Max_size) {
             if (array[index] == d) {
                 length++;
-                return index;
+                return length;
+
             }
             if (d > array[index]) {
-                index = 2 * index + 1;
-                length++;
-            }
-            else {
                 index = 2 * index + 2;
                 length++;
             }
+            else {
+                index = 2 * index + 1;
+                length++;
+            }
         }
     }
-    void my_delete1(int d) {
-        int index = search(d); // 搜索目标节点的索引
-        if (index == -1) {
-            cout << "ERROR: Value " << d << " not found in the tree." << endl;
-            return;
-        }
 
-        // 处理叶子节点
-        if (array[2 * index + 1] == -1 && array[2 * index + 2] == -1) {
-            array[index] = -1; // 直接将叶子节点置为空
-        }
-        // 处理只有左子树的节点
-        else if (array[2 * index + 1] != -1 && array[2 * index + 2] == -1) {
-            int replacementIndex = 2 * index + 1; // 左子树
-            // 找到左子树的最右节点
-            while (array[2 * replacementIndex + 2] != -1) {
-                replacementIndex = 2 * replacementIndex + 2;
-            }
-            array[index] = array[replacementIndex]; // 用最右节点的值替换目标节点
-            array[replacementIndex] = -1;          // 删除最右节点
-        }
-        // 处理只有右子树的节点
-        else if (array[2 * index + 1] == -1 && array[2 * index + 2] != -1) {
-            int replacementIndex = 2 * index + 2; // 右子树
-            // 找到右子树的最左节点
-            while (array[2 * replacementIndex + 1] != -1) {
-                replacementIndex = 2 * replacementIndex + 1;
-            }
-            array[index] = array[replacementIndex]; // 用最左节点的值替换目标节点
-            array[replacementIndex] = -1;          // 删除最左节点
-        }
-        // 处理同时有左右子树的节点
-        else {
-            int replacementIndex = 2 * index + 2; // 默认用右子树的最左节点
-            // 找到右子树的最左节点
-            while (array[2 * replacementIndex + 1] != -1) {
-                replacementIndex = 2 * replacementIndex + 1;
-            }
-            array[index] = array[replacementIndex]; // 用最左节点的值替换目标节点
-            array[replacementIndex] = -1;          // 删除最左节点
-        }
-
-        cout << "Deleted " << d << " successfully." << endl;
-
-        // 调用中序遍历打印结果
-        cout << "Inorder Traversal after Deletion: ";
-        inorder(array, 0, Max_size);
-        cout << endl;
-    }
-    void my_delete(int d) {
+    string my_delete(int d) {
         int index = search(d);
         int index1 = index;
-        if(index == -1){
-            return;
+        if(array[index*2+1] == d) {
+            my_delete(array[index*2+1]);
         }
+        if(index == -1){
+            return "error";
+        }
+
             if(array[index*2+1] == -1 && array[index*2+2] == -1) {
                 array[index]=-1;
             }
@@ -241,8 +202,6 @@ public:
                 array[index1] = array[index];
                 array[index] = -1;
                 leftup(index,index*2+1);
-
-
             }
             else {
                 index = index*2+2;
@@ -253,7 +212,8 @@ public:
                 array[index] = -1;
                 rightup(index,index*2+2);
             }
-            inorder(array,0,size);
+        string str = inorder();
+        return str;
         }
     void rightup(int index1, int index2)
     {
@@ -341,14 +301,26 @@ class BST {
         cout << p->data << " ";
     }
 
-    void inorder(Node *root) {
+    string inorder() {
+        stringstream ss;
+        inorderREC(root,ss);
+        return ss.str();
+    }
+    void inorderREC(Node *root,stringstream &ss) {
         if (root == nullptr) return;
-        inorder(root->left);
-        Print_data(root);
-        inorder(root->right);
+        inorderREC(root->left,ss);
+        ss<<root->data<<" ";
+        inorderREC(root->right,ss);
     }
 
-    void inorder2(Node *root)
+    string inorder2() {
+        stringstream ss;
+        inorder2REC(root,ss);
+        return ss.str();
+    }
+
+
+    void inorder2REC(Node *root,stringstream &ss)
     /*申请指针p指向root 创建堆栈stack
      *当p或stack非空时，将p入栈 并将p指向其左孩子结点
      *此过程中若p为空 则pop一个元素出栈并赋值给p 输出p 并将p指向右孩子
@@ -366,7 +338,7 @@ class BST {
             else {
                 p = stack1.stack_top();
                 stack1.stack_pop();
-                Print_data(p);
+                ss<<p->data<<" ";
                 p = p->right;
             }
         }
@@ -427,7 +399,7 @@ class BST {
     {
         if (root == nullptr) return nullptr;
         Node *q = root;
-        Node *s = nullptr;
+        Node *s = root;
         if (p == root) return nullptr;
         while(q!=nullptr) {
             if (p->data > q->data) {
@@ -449,7 +421,7 @@ class BST {
         return nullptr;
     }
 
-    void Node_delete(int x) {
+    string Node_delete(int x) {
         Node *p = search(x);
         Node *parent = Parent_search(p);
         if(p == nullptr) {
@@ -489,6 +461,8 @@ class BST {
             }
 
         }
+        string str =inorder2();
+        return str;
     }
 
 };
@@ -630,43 +604,71 @@ class AVL : public BST {
 
 
 int main() {
-    // 创建根节点为空的BST
+
+
+    ifstream inFile("input.txt", ios::in);
+    if (!inFile) {  // 检查文件是否成功打开
+        cout << "Error: Unable to open file for reading." << endl;
+        return 1;
+    }
+    ofstream outFile("output.txt", ios::out);
+    if (!outFile) {  // 检查文件是否成功打开
+        cout << "Error: Unable to open file for writing." << endl;
+        return 1;
+    }
     BST tree(nullptr);
     AVL avlt(nullptr);
     array_BST array_bst1(55000);
+
+
+    // 逐行读取文件内容
+    string line;
+    cout << "\nFile content:" << endl;
+    while (getline(inFile, line)) {
+        cout << line << endl;
+    }
+    stringstream ss(line);  // 使用字符串流解析输入
+    vector<int> numbers;     // 存储分割后的整型数组
+    int number;
+    // 使用字符串流和 >> 操作符将字符串分割并转为整数
+    while (ss >> number) {
+        numbers.push_back(number);
+    }
     // 插入数据到二叉树
-    int values1[] = {1,2,3};
-    int values[] = {50,1,1, 30, 70, 20, 40, 60, 80,19,231,32,435,35,2,3,4,5,6,7,8,9,10};
-    for (int value : values) {
+    for (int value : numbers) {
         tree.insert(value);
         avlt.insert(value);
         array_bst1.insert(value);
     }
-    // 测试递归中序遍历
-    cout << "Inorder traversal (recursive): ";
-    tree.inorder(tree.root);
-    cout << endl;
+    // 测试BST递归中序遍历
+    outFile << "Inorder traversal of BST (recursive): "<<tree.inorder()<<endl;
+    // 测试AVL非递归中序遍历
+    outFile << "Inorder traversal of AVL (non-recursive): " << avlt.inorder2()<<endl;
+    // 测试ARRAY_BST递归中序遍历
+    outFile << "Inorder traversal of array_BST (recursive): " << array_bst1.inorder() <<endl;
 
-    // 测试非递归中序遍历
-    cout << "Inorder traversal (non-recursive): ";
-    tree.inorder2(tree.root);
-    cout << endl;
-
-    cout << "Inorder traversal (recursive): ";
-    array_bst1.inorder(array_bst1.array,0,array_bst1.size);
-    cout << endl;
-    array_bst1.my_delete(50);
-    cout<<endl;
 
     float search_length_bst = 0,counter = 0,search_length_avl = 0,search_length_arr = 0;
-    for(int value :values) {
+    for(int value :numbers) {
         search_length_bst+=tree.searchlength(value);
         search_length_avl+=avlt.searchlength(value);
         search_length_arr+=array_bst1.search_length(value);
         counter+=1;
     }
-    cout << "ASL of BST = " << search_length_bst<<"/"<<counter << endl;
-    cout << "ASL of AVL = " << search_length_avl<<"/"<<counter << endl;
-    cout << "ASL of ARR_BST = " << search_length_arr<<"/"<<counter << endl;
+    outFile << "ASL of BST = " << search_length_bst<<"/"<<counter << endl;
+    outFile << "ASL of AVL = " << search_length_avl<<"/"<<counter << endl;
+    outFile << "ASL of ARR_BST = " << search_length_arr<<"/"<<counter << endl;
+
+    //测试BST删除
+    outFile << "Delete one node in the BST: " <<tree.Node_delete(1)<<endl;
+    //测试ARRAY_BST删除
+    outFile << "Delete one node in the array_BST: "<< avlt.Node_delete(1)<<endl;
+
+
+    // 关闭文件
+    inFile.close();
+    // 关闭文件
+    outFile.close();
+    cout << "File written successfully!" << endl;
     return 0;
 }

@@ -153,30 +153,6 @@ BST&AVL.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make "CMakeFiles/untitled.dir/BST&AVL.cpp.s"
 .PHONY : BST&AVL.cpp.s
 
-fstream.o: fstream.cpp.o
-.PHONY : fstream.o
-
-# target to build an object file
-fstream.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/fstream.cpp.o
-.PHONY : fstream.cpp.o
-
-fstream.i: fstream.cpp.i
-.PHONY : fstream.i
-
-# target to preprocess a source file
-fstream.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/fstream.cpp.i
-.PHONY : fstream.cpp.i
-
-fstream.s: fstream.cpp.s
-.PHONY : fstream.s
-
-# target to generate assembly for a file
-fstream.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/fstream.cpp.s
-.PHONY : fstream.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +165,6 @@ help:
 	@echo "... BST&AVL.o"
 	@echo "... BST&AVL.i"
 	@echo "... BST&AVL.s"
-	@echo "... fstream.o"
-	@echo "... fstream.i"
-	@echo "... fstream.s"
 .PHONY : help
 
 

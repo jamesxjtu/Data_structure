@@ -6,10 +6,10 @@
 #include <string>
 
 using namespace std;
-/*
+
 int main() {
     // 创建和写入文件
-    ofstream outFile("journal.txt", ios::out);
+    /*ofstream outFile("journal.txt", ios::out);
     if (!outFile) {  // 检查文件是否成功打开
         cout << "Error: Unable to open file for writing." << endl;
         return 1;
@@ -22,8 +22,7 @@ int main() {
 
     // 关闭文件
     outFile.close();
-
-    cout << "File written successfully!" << endl;
+    cout << "File written successfully!" << endl;*/
 
     // 读取文件
     ifstream inFile("example.txt", ios::in);
@@ -43,4 +42,4 @@ int main() {
     inFile.close();
 
     return 0;
-}*/
+}
