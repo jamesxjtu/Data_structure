@@ -4,6 +4,5 @@ project(untitled)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(untitled
-        BST&AVL.cpp
-
+Parking_System.cpp
         )
