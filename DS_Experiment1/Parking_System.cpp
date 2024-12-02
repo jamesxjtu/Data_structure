@@ -213,6 +213,7 @@ void stop2buffer() {
         cout<<"Error: Parking lot is empty or the buffer is full"<<endl;
     }
     else {
+        cout << PARKINGLOT.stops[PARKINGLOT.top]->license<<" goes to the buffer"<<endl;
         BUFFER.stack_push(PARKINGLOT.stack_pop());
 
     }
@@ -223,6 +224,7 @@ void buffer2stop() {
         cout<<"Error: Parking lot is full or the buffer is empty"<<endl;
     }
     else {
+        cout << BUFFER.car_buffer[BUFFER.top]->license<<" goes to the parking lot"<<endl;
         PARKINGLOT.stack_push(BUFFER.stack_pop());
     }
 }
@@ -232,6 +234,7 @@ void stop2pave() {
         cout<<"Error: Parking lot is empty or the pave is full"<<endl;
     }
     else {
+        PARKINGLOT.stops[PARKINGLOT.top]->state = 'p';
         PAVE.enqueue(PARKINGLOT.stack_pop());
     }
 }
@@ -241,6 +244,7 @@ void pave2stop() {
         cout<<"Error: Parking lot is full or the pave is empty"<<endl;
     }
     else {
+        PAVE.car_pave[PAVE.front+1]->state = 's';
         PARKINGLOT.stack_push(PAVE.dequeue());
     }
 }
@@ -293,12 +297,14 @@ void CAR_IN_OPERATE() {
     else {
         if(strcmp(license,PAVE.car_pave[PAVE.front+1]->license) == 0) {
             CAR_IN();
+            PAVE.car_pave[PAVE.rear]->state = 'p';
         }
         else {
             cout << "Please wait in line"<<endl;
         }
     }
 }
+
 void CAR_OUT_OPERATE() {
     char str[7];
     cout << " Please enter the license : "<<endl;
@@ -322,12 +328,12 @@ int getUserOperation() {
     cout<<"==================="<<endl;
     return userOperate;
 }
+
 void processUserOperation(int userOperation) {
     if(cin.fail() ) {
         cin.clear();
         cout<< "Please enter a valid choice"<<endl;
         cin.ignore(1000, '\n');  // 丢弃缓冲区中的错误输入
-
     }
     else {
         if(userOperation == 1) {

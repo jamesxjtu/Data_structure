@@ -1,7 +1,0 @@
-Inorder traversal of BST (recursive): 1 1 2 3 4 5 6 7 8 9 10 19 20 30 32 35 40 50 60 70 80 231 435 
-Inorder traversal of AVL (non-recursive): 1 1 2 3 4 5 6 7 8 9 10 19 20 30 32 35 40 50 60 70 80 231 435 
-Inorder traversal of array_BST (recursive): 1 1 2 3 4 5 6 7 8 9 10 19 20 30 32 35 40 50 60 70 80 231 435 
-ASL of BST = 154/23
-ASL of AVL = 95/23
-ASL of ARR_BST = 154/23
-Delete one node in the BST: 2 3 4 5 6 7 8 9 10 19 20 30 32 35 40 50 60 70 80 231 435 

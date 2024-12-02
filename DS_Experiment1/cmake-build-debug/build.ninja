@@ -41,35 +41,35 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/jameswang/CLionProjects/Data_structure/DS_Experiment1/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target untitled
+# Object build statements for EXECUTABLE target Data_structure
 
 
 #############################################
-# Order-only phony target for untitled
+# Order-only phony target for Data_structure
 
-build cmake_object_order_depends_target_untitled: phony || .
+build cmake_object_order_depends_target_Data_structure: phony || .
 
-build CMakeFiles/untitled.dir/Parking_System.cpp.o: CXX_COMPILER__untitled_unscanned_Debug /Users/jameswang/CLionProjects/Data_structure/DS_Experiment1/Parking_System.cpp || cmake_object_order_depends_target_untitled
-  DEP_FILE = CMakeFiles/untitled.dir/Parking_System.cpp.o.d
+build CMakeFiles/Data_structure.dir/Josephus.cpp.o: CXX_COMPILER__Data_structure_unscanned_Debug /Users/jameswang/CLionProjects/Data_structure/DS_Experiment1/Josephus.cpp || cmake_object_order_depends_target_Data_structure
+  DEP_FILE = CMakeFiles/Data_structure.dir/Josephus.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/untitled.dir
-  OBJECT_FILE_DIR = CMakeFiles/untitled.dir
+  OBJECT_DIR = CMakeFiles/Data_structure.dir
+  OBJECT_FILE_DIR = CMakeFiles/Data_structure.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target untitled
+# Link build statements for EXECUTABLE target Data_structure
 
 
 #############################################
-# Link the executable untitled
+# Link the executable Data_structure
 
-build untitled: CXX_EXECUTABLE_LINKER__untitled_Debug CMakeFiles/untitled.dir/Parking_System.cpp.o
+build Data_structure: CXX_EXECUTABLE_LINKER__Data_structure_Debug CMakeFiles/Data_structure.dir/Josephus.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
-  OBJECT_DIR = CMakeFiles/untitled.dir
+  OBJECT_DIR = CMakeFiles/Data_structure.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = untitled
-  TARGET_PDB = untitled.dbg
+  TARGET_FILE = Data_structure
+  TARGET_PDB = Data_structure.dbg
 
 
 #############################################
@@ -105,7 +105,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/jameswang/CLionProjects/Data_structure/DS_Experiment1/cmake-build-debug
 
-build all: phony untitled
+build all: phony Data_structure
 
 # =============================================================================
 # Built-in targets

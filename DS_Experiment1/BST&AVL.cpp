@@ -660,7 +660,7 @@ int main() {
     outFile << "ASL of ARR_BST = " << search_length_arr<<"/"<<counter << endl;
 
     //测试BST删除
-    outFile << "Delete one node in the BST: " <<tree.Node_delete(1)<<endl;
+    outFile << "Delete one node in the BST: " <<tree.Node_delete(40)<<endl;
     //测试ARRAY_BST删除
     outFile << "Delete one node in the array_BST: "<< avlt.Node_delete(1)<<endl;
 

@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
     // 创建和写入文件
-    /*ofstream outFile("journal.txt", ios::out);
+    /*ofstream outFile("BST_journal.txt", ios::out);
     if (!outFile) {  // 检查文件是否成功打开
         cout << "Error: Unable to open file for writing." << endl;
         return 1;
